@@ -16,13 +16,51 @@ public class MainActivity extends AppCompatActivity {
     public static final int TEXT_REQUEST = 1;
     private TextView mReplyHeadTextView;
     private TextView mReplyTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Log at the start of the onCreate()
+        Log.d(LOG_TAG,"------");
+        Log.d(LOG_TAG,"onCreate");
+
         setContentView(R.layout.activity_main);
         mMessageEditText = findViewById(R.id.editText);
         mReplyHeadTextView = findViewById(R.id.text_header_reply);
         mReplyTextView=findViewById(R.id.text_mesage_reply);
+
+        if(savedInstanceState != null){
+            boolean isVisible =
+                    savedInstanceState.getBoolean("reply_visible");
+            if(isVisible){
+                mReplyHeadTextView.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(LOG_TAG,"onStart");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(LOG_TAG,"onPause");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(LOG_TAG,"onRestart");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(LOG_TAG,"onStop");
     }
 
     public void launchSecondActivity(View view) {
@@ -43,6 +81,15 @@ public class MainActivity extends AppCompatActivity {
                 mReplyTextView.setVisibility(View.VISIBLE);
                 mReplyTextView.setText(reply);
             }
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (mReplyHeadTextView.getVisibility() == View.VISIBLE) {
+            outState.putBoolean("reply_visible", true);
+            outState.putString("reply_text",mReplyTextView.getText().toString());
         }
     }
 }
