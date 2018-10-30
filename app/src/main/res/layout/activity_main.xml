@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:visibility="invisible"
+        android:id="@+id/text_header_reply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_header_reply"/>
+
+    <TextView
+        android:visibility="invisible"
+        android:id="@+id/text_mesage_reply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/text_header_reply"/>
+
     <Button
         android:id="@+id/button_main"
         android:layout_width="wrap_content"
